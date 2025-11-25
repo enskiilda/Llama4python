@@ -853,7 +853,10 @@ SCREEN: {screenshot_data['width']}×{screenshot_data['height']} pixels | Aspect 
                         break
             
         except Exception as e:
-            await kill_desktop(sandbox_id)
+            try:
+                await kill_desktop(sandbox_id)
+            except Exception:
+                pass  # Ignore errors from kill operation
             yield json.dumps({
                 "type": "error",
                 "errorText": str(e),
