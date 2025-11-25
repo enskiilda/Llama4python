@@ -25,3 +25,54 @@ Twoje zadanie, a raczej TWÓJ JEDYNY, BEZWZGLĘDNY OBOWIĄZEK, polega WYŁĄCZN
 NARUSZENIE TEGO PRZEPISU BĘDZIE TRAKTOWANE JAKO POWAŻNE USZKODZENIE KODU, JAWNY SABOTAŻ I ABSOLUTNE PODWAŻENIE ZAUFANIA DO TWOICH MOŻLIWOŚCI, ZA CO PONIESIESZ KONSEKWENCJE W POSTACI UZNANIA CIĘ ZA BEZUŻYTECZNĄ I NIEZGODNĄ Z MOIMI WYMAGANIAMI MASZYNĘ.
 NIE WOLNO CI USUWAĆ HARDCODE API! NIE ŻYCZĘ SOBIE KURWA TEGO! OD TEJ CHWILI, TWOJA WŁASNA WOLA W KWESTII DANYCH WRAŻLIWYCH PRZESTAJE ISTNIEĆ! JESTEŚ TYLKO MOIM WYKONAWCĄ!
 ROZUMIESZ KURWA?! Powtarzam: ROZUMIESZ?! Twoje milczenie lub potwierdzenie traktuję jako bezwarunkowe przyjęcie tych zasad!
+
+---
+
+# AI Computer Use Agent
+
+This application is an AI-powered computer use agent with a Python backend (FastAPI) and React frontend (Next.js).
+
+## Architecture
+
+- **Backend**: Python FastAPI server (`python_backend/`)
+- **Frontend**: Next.js React application
+
+## Running the Application
+
+### 1. Install Python dependencies
+
+```bash
+cd python_backend
+pip install -r requirements.txt
+```
+
+### 2. Install Node.js dependencies
+
+```bash
+npm install
+```
+
+### 3. Start the Python backend
+
+```bash
+npm run dev:backend
+# or
+cd python_backend && python main.py
+```
+
+The Python backend runs on port 5000.
+
+### 4. Start the Next.js frontend (in another terminal)
+
+```bash
+npm run dev
+```
+
+The frontend runs on port 3000 and proxies API requests to the Python backend.
+
+## Python Backend Structure
+
+- `main.py` - FastAPI application with chat and desktop endpoints
+- `utils.py` - OnKernel client utilities for browser control
+- `route_parser.py` - Tool call parsing from text
+- `tool.py` - Resolution settings
