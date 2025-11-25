@@ -1,7 +1,6 @@
 "use client";
 
 import { RealtimeMessage } from "@/components/realtime-message";
-import { getDesktopURL } from "@/lib/e2b/utils";
 import { useScrollToBottom } from "@/lib/use-scroll-to-bottom";
 import {
   useEffect,
@@ -18,6 +17,15 @@ import { toast } from "sonner";
 import { AISDKLogo } from "@/components/icons";
 import { PromptSuggestions } from "@/components/prompt-suggestions";
 import { RealtimeSession } from "@/lib/realtime-session";
+
+// Fetch desktop URL from Python backend
+async function getDesktopURLFromBackend(): Promise<{ streamUrl: string; id: string }> {
+  const response = await fetch("/api/desktop");
+  if (!response.ok) {
+    throw new Error("Failed to get desktop URL");
+  }
+  return response.json();
+}
 
 export default function Chat() {
   const [desktopContainerRef, desktopEndRef] = useScrollToBottom();
@@ -68,7 +76,7 @@ export default function Chat() {
     const init = async () => {
       try {
         session.setInitializing(true);
-        const { streamUrl, id } = await getDesktopURL(undefined);
+        const { streamUrl, id } = await getDesktopURLFromBackend();
         session.updateDesktop({ streamUrl, sandboxId: id });
       } catch (err) {
         console.error("Failed to initialize desktop:", err);
